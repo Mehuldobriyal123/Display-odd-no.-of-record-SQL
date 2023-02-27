@@ -1,0 +1,30 @@
+Question ->
+Write a SQL query to display alternate odd number of records from the given table. 
+
+
+Query to create Employees table ->
+CREATE TABLE Employees (Id INT,
+					    First_Name VARCHAR(20),
+						Last_Name VARCHAR(20),
+						Gender VARCHAR(10),
+						City VARCHAR(20),
+						PAN_Card VARCHAR(10))
+
+
+Query to insert records into Employees table ->							
+INSERT INTO Employees VALUES (1,'Mia','Mehta','Female','Mumbai','ABCDE1111A')
+INSERT INTO Employees VALUES (2,'Amy','Williams','Female','Bangalore','FGHIJ2222B')
+INSERT INTO Employees VALUES (3,'John','Chahal','Male','Pune','KLMNO3333C')
+INSERT INTO Employees VALUES (4,'Sumer','Thomas','Male','Mumbai','PQRST4444D')
+INSERT INTO Employees VALUES (5,'Emma','Jackson','Female','Pune','UVWXY5555E')
+INSERT INTO Employees VALUES (6,'Oasge','Walker','Female','Pune','YXWVU6666F')
+INSERT INTO Employees VALUES (7,'Joe','Robinson','Female','Mumbai','TSRQP7777G')
+INSERT INTO Employees VALUES (8,'Michael','Chatterjee','Male','Bangalore','ONMLK8888H')
+INSERT INTO Employees VALUES (9,'Joseph','Bhatt','Male','Bangalore','JIHGF9999I')
+INSERT INTO Employees VALUES (10,'Maria','Acharya','Female','Mumbai','EDCBA0000J')
+
+
+Solution ->
+SELECT Sr_Num.Id,First_Name,Sr_Num.Last_Name,Sr_Num.Gender,Sr_Num.City,Sr_Num.PAN_Card from
+(SELECT *, ROW_NUMBER() OVER(ORDER BY Id) as Serial_Num from Employees) Sr_Num
+WHERE (Sr_Num.Serial_Num%2)=1;
